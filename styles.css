@@ -1,0 +1,1526 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
+/* --------------------------------------
+   1. Global Reset and Variables
+   -------------------------------------- */
+:root {
+    --color-primary: #4f46e5; /* Indigo 600 - Used for accents */
+    --color-primary-dark: #4338ca; /* Indigo 700 */
+    --color-cta-blue: #00b0ff; /* Bright Blue for CTAs (Donate/Follow) */
+    --color-cta-blue-dark: #0099e0;
+    --color-background: #f9fafb; /* Light Gray background */
+    --color-text-dark: #111827; /* Near Black */
+    --color-text-light: #6b7280; /* Gray 400 */
+    --color-hero-bg: #1e293b; /* Dark Navy for Hero background */
+    --max-width: 1280px;
+    --spacing-large: 4rem;
+    --spacing-medium: 2rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Merriweather', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* --------------------------------------
+   2. Layout and Utility Classes
+   -------------------------------------- */
+.main-content {
+    flex-grow: 1;
+}
+
+section {
+    padding: var(--spacing-large) 1rem;
+}
+
+
+/* --------------------------------------
+   3. Header and Navigation
+   -------------------------------------- */
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem 1rem;
+}
+
+.site-logo {
+    height: 40px;
+    max-height: 40px;
+    width: auto;
+}
+
+/* Mobile-first: Hide desktop nav and show mobile button by default */
+.desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+    background-color: #f0f4ff;
+}
+
+.mobile-menu-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--color-text-dark);
+    transition: color 0.3s;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--color-primary);
+}
+
+.mobile-nav-dropdown {
+    display: none;
+    padding: 0 1rem 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Desktop Dropdown specific */
+.nav-item-dropdown {
+    position: relative;
+    padding: 0.5rem 0.75rem;
+}
+
+.nav-item-dropdown > .nav-link {
+    padding: 0;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    min-width: 250px;
+    padding: 0.5rem 0;
+    z-index: 100;
+}
+
+.nav-item-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--color-text-dark);
+    text-decoration: none;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f4ff;
+}
+
+
+/* Mobile Dropdown Styling */
+.mobile-nav-dropdown a,
+.mobile-nav-dropdown .mobile-dropdown-header {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--color-text-dark);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.mobile-dropdown-header {
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid var(--color-text-dark);
+    transition: transform 0.3s;
+}
+
+.mobile-sub-menu {
+    display: none;
+    padding-left: 1.5rem;
+    margin-left: 0.5rem;
+    border-left: 2px solid var(--color-primary);
+}
+
+.mobile-sub-menu a {
+    font-weight: 400;
+    padding: 0.4rem 0.75rem;
+    margin-top: 0.2rem;
+}
+
+
+/* --------------------------------------
+   4. Hero Section (Home Page)
+   -------------------------------------- */
+.section-hero {
+    background-image: url(images/close-up-man-portrait-dark.jpg);
+    color: white;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 1rem;
+    text-shadow: none;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.hero-header-cta {
+    width: 100%;
+    max-width: var(--max-width);
+    text-align: right;
+    align-self: flex-start;
+    margin-bottom: 2rem;
+}
+
+.hero-content-prayer-blog {
+    max-width: 600px;
+    margin-top: auto;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.hero-intro-text {
+    font-size: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 0;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #ced1d6;
+}
+
+.hero-actions {
+    margin-top: 1.5rem;
+}
+
+
+/* --------------------------------------
+   5. Buttons
+   -------------------------------------- */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    display: inline-block;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--color-cta-blue);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 176, 255, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-cta-blue-dark);
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    color: var(--color-primary);
+    background-color: transparent;
+    border-color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(79, 70, 229, 0.1);
+}
+
+.btn-donate {
+    background-color: var(--color-cta-blue);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    font-weight: 700;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: none;
+    transition: background-color 0.2s;
+    text-transform: uppercase;
+}
+.btn-donate:hover {
+    background-color: var(--color-cta-blue-dark);
+}
+
+
+/* --------------------------------------
+   6. Gallery (The Working Carousel)
+   -------------------------------------- */
+.section-gallery {
+    text-align: center;
+    background-color: white;
+}
+
+.section-gallery h3 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: var(--color-text-dark);
+}
+
+.carousel-wrapper {
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* Aspect Ratio Container (16:9) */
+    padding-top: 56.25%;
+    height: 0;
+    background-color: #eee;
+}
+
+.carousel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-image.active {
+    opacity: 1; /* Only the active image is visible */
+    z-index: 10;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(17, 24, 39, 0.6);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    transition: background-color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(17, 24, 39, 0.8);
+}
+
+.prev-btn {
+    left: 1rem;
+}
+
+.next-btn {
+    right: 1rem;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    z-index: 20;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(17, 24, 39, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.dot.active {
+    background-color: var(--color-cta-blue);
+    transform: scale(1.2);
+}
+
+
+/* --------------------------------------
+   7. About Section (Home Snippet)
+   -------------------------------------- */
+.section-about {
+    background-color: var(--color-background);
+}
+
+.about-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+}
+
+.about-text .text-subtitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.about-text .text-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    color: var(--color-text-dark);
+}
+
+.about-text .text-body {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    color: var(--color-text-light);
+}
+
+.mission-list {
+    list-style: none;
+    margin-top: 1.5rem;
+    padding: 0;
+}
+
+.mission-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-light);
+}
+
+.mission-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.about-image-container {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.about-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* --------------------------------------
+   8. Home Services Section
+   -------------------------------------- */
+.section-services {
+    background-color: #f0f4ff; /* Very light indigo background */
+    text-align: center;
+}
+
+.services-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: var(--color-text-dark);
+}
+
+.scripture-quote-block {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.scripture-quote-block::before {
+    content: "\201C";
+    font-family: serif;
+    font-size: 8rem;
+    color: #e5e7eb;
+    position: absolute;
+    top: 0.5rem;
+    left: 20px;
+    line-height: 1;
+    z-index: 1;
+}
+
+.scripture-text {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--color-text-dark);
+    position: relative;
+    z-index: 2;
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.quote-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    position: relative;
+    z-index: 2;
+}
+
+.author-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+    border: 2px solid var(--color-primary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.service-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.service-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.service-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.service-card p {
+    color: var(--color-text-light);
+}
+
+.services-cta {
+    margin-top: 3rem;
+    display: inline-block;
+}
+
+
+/* --------------------------------------
+   9. Contact CTA Section
+   -------------------------------------- */
+.section-contact-cta {
+    background-color: var(--color-primary);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.contact-cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-cta-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.contact-cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    color: #e0e7ff;
+}
+
+/* Override button styles for this dark section */
+.section-contact-cta .btn-primary {
+    background-color: white;
+    color: var(--color-primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.section-contact-cta .btn-primary:hover {
+    background-color: #f0f4ff;
+    color: var(--color-primary-dark);
+}
+
+
+/* --------------------------------------
+   10. Internal Page Hero (Replaces Section 4 styles)
+   -------------------------------------- */
+.internal-hero {
+    background-color: var(--color-hero-bg);
+    color: white;
+    padding: 3rem 1rem 2rem;
+    text-align: center;
+    position: relative;
+}
+.internal-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+.internal-hero p {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    color: #e0e7ff;
+}
+.internal-hero .hero-header-cta {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    text-align: right;
+    width: auto;
+    padding: 0;
+}
+.internal-hero .btn-donate {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+}
+
+/* --------------------------------------
+   11. Generic Content Section Styling
+   -------------------------------------- */
+.section-content {
+    background-color: white;
+    padding: var(--spacing-large) 1rem;
+}
+
+/* Two-Column Grid for Intro/About */
+.content-grid-half {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    grid-template-columns: 1fr; /* Default to single column on mobile */
+}
+
+.content-grid-half .text-block h2 {
+    font-size: 2rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+}
+
+.content-grid-half .text-block p {
+    color: var(--color-text-light);
+    line-height: 1.7;
+}
+
+.content-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* --------------------------------------
+   12. Mission and Values Section
+   -------------------------------------- */
+.section-mission {
+    background-color: var(--color-background);
+}
+
+.mission-values-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr; /* Default to single column on mobile */
+}
+
+.mission-card {
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mission-card h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.card-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.card-secondary {
+    background-color: white;
+    border: 2px solid var(--color-primary);
+    color: var(--color-text-dark);
+}
+
+
+/* --------------------------------------
+   13. Founder's Bio Section
+   -------------------------------------- */
+.section-bio {
+    background-color: white;
+}
+
+.bio-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    grid-template-columns: 1fr; /* Default to single column on mobile */
+}
+
+.bio-image-container {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 2rem; /* Center image on mobile */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.bio-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.bio-text-block h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.bio-paragraph {
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-light);
+}
+
+
+/* --------------------------------------
+   14. Prayer Section (Alternating Content)
+   -------------------------------------- */
+.prayer-section {
+    padding: var(--spacing-large) 1rem;
+}
+
+.content-grid-alternate {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    grid-template-columns: 1fr; /* Default to single column on mobile */
+}
+
+.content-grid-alternate .text-block h2 {
+    font-size: 2rem;
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+}
+
+.content-grid-alternate .text-block p {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.content-grid-alternate .image-block img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-bg {
+    background-color: #f5f5f5; /* Slight background difference for alternating feel */
+}
+
+/* --------------------------------------
+   15. Footer (Moved for priority)
+   -------------------------------------- */
+.main-footer {
+    background-color: var(--color-text-dark);
+    color: #9ca3af;
+    padding: 2.5rem 1rem 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    border-top: 1px solid #374151;
+}
+
+/* 16. Admin Dashboard Styling */
+.admin-header {
+    box-shadow: none;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.admin-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+
+.admin-section {
+    padding: var(--spacing-medium) 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.admin-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary-dark);
+}
+
+.centered-form-container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    text-align: center;
+}
+
+.auth-form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="text"] {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+.login-error {
+    background-color: #fcebeb;
+    color: #cc0000;
+    padding: 0.75rem;
+    border: 1px solid #cc0000;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.dashboard-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.posts-list-container {
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+}
+
+.post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.post-item-actions button {
+    margin-left: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+}
+
+/* Post Editor */
+.editor-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: #f0f4ff;
+    border-radius: 12px;
+}
+
+.editor-container h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary-dark);
+}
+
+.post-editor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.post-editor-form label {
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: var(--color-text-dark);
+    text-align: left;
+}
+
+.post-editor-form input[type="text"],
+.post-editor-form select,
+.post-editor-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* --- UPDATE MEDIA QUERIES --- */
+/* Add mobile styles for post list */
+@media (max-width: 639px) {
+    /* ... existing mobile styles ... */
+
+    .post-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* 17. Dynamic Post Listing Styling */
+
+.article-posts-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article-post-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: var(--spacing-medium);
+    margin-bottom: var(--spacing-large);
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.article-header-dynamic h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.article-meta {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+}
+
+.article-body-dynamic p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--color-text-dark);
+}
+
+.article-banner-image-dynamic {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.read-more-btn {
+    margin-top: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.comments-section {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+/* 18. Video Content Styling (Monthly Broadcast) */
+.video-posts-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.video-post-item {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.video-item-container h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 0.75rem;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    margin-bottom: 1rem;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.video-description {
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+/* 19. Form Styling (Prayer Request) */
+.form-section {
+    background-color: var(--color-background);
+    padding: var(--spacing-large) 1rem;
+}
+
+.request-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.request-form .form-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f4ff;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group p {
+    display: block;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.form-group label, .form-group p {
+    display: block;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.form-field {
+    /* For responsiveness */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column on mobile */
+    gap: 1.5rem;
+}
+
+.request-form input[type="text"],
+.request-form input[type="email"],
+.request-form input[type="tel"],
+.request-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+.request-form textarea {
+    resize: vertical;
+}
+
+.char-count {
+    text-align: right;
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-top: 0.25rem;
+}
+
+.radio-options {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400 !important; /* Override bold font */
+}
+
+.radio-label input {
+    margin-right: 0.5rem;
+}
+
+.form-submit-btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.form-message {
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* --- UPDATE MEDIA QUERIES --- */
+
+/* Tablet and larger (Min-width 640px) */
+@media (min-width: 640px) {
+
+    /* Apply two-column grid for Name, Email/Phone */
+    .form-grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* 20. Contact Info Section */
+.contact-info-section {
+    background-color: white;
+}
+
+.contact-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    gap: 3rem;
+    align-items: flex-start;
+    grid-template-columns: 1fr; /* Default to single column on mobile */
+}
+
+.contact-details-container h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 2rem;
+}
+
+.contact-block {
+    margin-bottom: 2rem;
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+}
+
+.detail-value {
+    display: block;
+    font-size: 1.125rem;
+    color: var(--color-text-dark);
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.detail-value:hover {
+    color: var(--color-primary-dark);
+}
+
+.contact-map-container {
+    padding-top: 2rem;
+}
+
+/* --- UPDATE MEDIA QUERIES --- */
+/* Tablet and larger (Min-width 640px) */
+@media (min-width: 640px) {
+
+    /* Apply two-column grid for Contact */
+    .contact-grid {
+        grid-template-columns: 1.5fr 1fr; /* Details column wider than map column */
+    }
+}
+
+/* 21. Full Services Grid */
+.services-full-grid-section {
+    background-color: var(--color-background);
+    text-align: center;
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    margin-bottom: 3rem;
+}
+
+.services-full-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.service-card-full {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card-full:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-title-full {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+}
+
+.service-description-full {
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.start-project-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* 22. Prayer Notes Section */
+.prayer-notes-section {
+    background-color: white;
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.prayer-notes-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hope-scripture {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--color-primary-dark);
+    border-left: 4px solid var(--color-primary);
+    padding: 0.5rem 1rem;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    text-align: left;
+    background-color: #f0f4ff;
+    border-radius: 4px;
+}
+
+.notes-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 1.5rem;
+}
+
+.prayer-notes-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    font-size: 1.125rem;
+    color: var(--color-text-dark);
+}
+
+.prayer-notes-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.prayer-notes-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* 23. Prayer Hub Grid */
+.prayer-hub-grid-section {
+    background-color: var(--color-background);
+    padding-top: 3rem;
+}
+
+.prayer-hub-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.hub-card {
+    display: block;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hub-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.hub-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.hub-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    padding: 0 1rem;
+}
+
+.hub-description {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    padding: 0 1rem 1.5rem;
+}
+
+/* In styles.css, add these styles */
+.single-comment {
+    border-left: 3px solid var(--color-primary-light);
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.single-comment p {
+    margin: 0;
+}
+
+/* --------------------------------------
+   .24 Media Queries (Responsiveness)
+   -------------------------------------- */
+/* Tablet and larger (Min-width 640px) */
+@media (min-width: 640px) {
+    /* Header/Nav */
+    .desktop-nav {
+        display: flex;
+    }
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    /* Home Hero */
+    .hero-title {
+        font-size: 4rem;
+    }
+    .hero-intro-text {
+        font-size: 2rem;
+    }
+
+    /* About/Content Grids */
+    .content-grid-half {
+        grid-template-columns: 1fr 1fr;
+    }
+    .mission-values-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .bio-grid {
+        grid-template-columns: 300px 1fr; /* Image column and text column */
+    }
+    .bio-image-container {
+        margin: 0; /* Remove auto margin on desktop */
+    }
+    .bio-text-block h2 {
+        text-align: left; /* Align text to left on desktop */
+    }
+
+    /* Prayer Section Alternation */
+    .content-grid-alternate {
+        grid-template-columns: 1fr 1fr;
+    }
+    .content-grid-alternate.reverse-on-mobile {
+        /* Swap columns using grid property for the alternating pattern */
+        grid-template-areas: "image text";
+    }
+    .content-grid-alternate.reverse-on-mobile .text-block {
+        grid-area: text;
+    }
+    .content-grid-alternate.reverse-on-mobile .image-block {
+        grid-area: image;
+    }
+}
+
+/* Larger screens (Min-width 1024px) */
+@media (min-width: 1024px) {
+    .hero-title {
+        font-size: 5rem;
+    }
+}
+
+/* Mobile-only styles (Max-width 639px) */
+@media (max-width: 639px) {
+    /* Home Hero */
+    .hero-content-prayer-blog {
+        padding-bottom: 2rem;
+    }
+    .hero-title {
+        font-size: 3rem;
+    }
+    .hero-intro-text {
+        font-size: 1.5rem;
+    }
+
+    /* About */
+    .about-image-container {
+        order: -1;
+    }
+    .bio-image-container {
+        margin-bottom: 2rem;
+    }
+    .internal-hero {
+        padding-bottom: 4rem;
+    }
+
+    /* NEW FIX: Push the main title down to clear the Donate button */
+    .internal-hero h1 {
+        padding-top: 2rem; /* Add 2rem spacing above the title */
+    }
+}

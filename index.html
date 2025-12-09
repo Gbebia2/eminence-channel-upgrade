@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eminence Channel Ministries</title>
+    <!-- Link to our standard CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- 1. HEADER (Navigation Bar) -->
+    <header class="main-header">
+        <div class="header-content">
+            <!-- Logo Image -->
+            <a href="#home" class="logo-link">
+                <img
+                    src="WhatsApp Image 2025-11-25 at 19.17.10_491900f5.jpg"
+                    alt="Eminence Channel Ministries Logo"
+                    class="site-logo"
+                >
+            </a>
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about-us.html" class="nav-link">About Us</a>
+
+                <!-- Prayers Dropdown (The ONLY dropdown, containing all sub-links) -->
+                <div class="nav-item-dropdown">
+                    <a href="prayers.html" class="nav-link">Prayers</a>
+                    <div class="dropdown-menu">
+                        <a href="pray-along-with-me.html">Pray Along With Me</a>
+                        <a href="a-quick-word.html">A Quick Word</a>
+                        <a href="ministers-desk.html">From The Minister's Desk</a>
+                        <a href="monthly-broadcast.html">Monthly Broadcast</a>
+                        <a href="praying-psalms.html">Praying Psalms</a>
+                        <a href="my-secret-place.html">My Secret Place</a>
+                        <a href="my-space.html">My Space</a>
+                    </div>
+                </div>
+
+                <a href="prayer-request.html" class="nav-link">Prayer Request</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="services.html" class="nav-link">Services</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobile-menu-btn">
+                <!-- Hamburger Icon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <nav class="mobile-nav-dropdown" id="mobile-menu-dropdown">
+            <a href="index.html">Home</a>
+            <a href="about-us.html">About Us</a>
+
+            <!-- Prayers Mobile Dropdown Header -->
+           <div class="mobile-dropdown-header" data-target="prayers-sub">Prayers <span class="arrow-icon"></span></div>
+            <nav class="mobile-sub-menu" id="prayers-sub">
+                <a href="prayers.html" style="font-weight: 700;">— View All —</a>
+                <a href="pray-along-with-me.html">Pray Along With Me</a>
+                <a href="a-quick-word.html">A Quick Word</a>
+                <a href="ministers-desk.html">From The Minister's Desk</a>
+                <a href="monthly-broadcast.html">Monthly Broadcast</a>
+                <a href="praying-psalms.html">Praying Psalms</a>
+                <a href="my-secret-place.html">My Secret Place</a>
+                <a href="my-space.html">My Space</a>
+            </nav>
+
+            <a href="prayer-request.html">Prayer Request</a>
+            <a href="contact.html">Contact</a>
+            <a href="services.html">Services</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="main-content">
+
+        <!-- 2. HERO SECTION (With Donate CTA and Prayer Blog Intro) -->
+        <section id="home" class="section-hero hero-image-background">
+            <div class="hero-header-cta">
+                <a href="donate.html" class="btn btn-donate">Donate</a>
+            </div>
+
+            <div class="hero-content-prayer-blog">
+                <p class="hero-intro-text">The</p>
+                <h2 class="hero-title">Prayer Blog</h2>
+                <p class="hero-subtitle">A deeper dive into the ministry of prayer and reasons to trust in the Lord more</p>
+                <div class="hero-actions">
+                    <a href="about-us.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. WORKING DYNAMIC IMAGE CAROUSEL (Client's Key Feature) -->
+        <section id="gallery-section" class="section-gallery">
+            <h3>Photo Highlights</h3>
+
+            <div class="carousel-wrapper">
+                <div id="carousel-container" class="carousel-container">
+                    <!-- Placeholder images (will be controlled by script.js) -->
+                    <img src="images/IMG-20251126-WA0011.jpg" alt="Photo 1" class="carousel-image active" data-index="0">
+                    <img src="images/IMG-20251126-WA0012.jpg" alt="Photo 2" class="carousel-image" data-index="1">
+                    <img src="images/IMG-20251126-WA0014.jpg" alt="Photo 3" class="carousel-image" data-index="2">
+                    <img src="images/IMG-20251126-WA0015.jpg" alt="Photo 4" class="carousel-image" data-index="3">
+                    <img src="images/IMG-20251126-WA0016.jpg" alt="Photo 5" class="carousel-image" data-index="4">
+                    <img src="images/IMG-20251126-WA0017.jpg" alt="Photo 6" class="carousel-image" data-index="5">
+                    <img src="images/IMG-20251126-WA0018.jpg" alt="Photo 7" class="carousel-image" data-index="6">
+                    <img src="images/IMG-20251126-WA0019.jpg" alt="Photo 8" class="carousel-image" data-index="7">
+                    <img src="images/IMG-20251126-WA0033.jpg" alt="Photo 9" class="carousel-image" data-index="8">
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button id="prev-btn" class="carousel-btn prev-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+
+                <button id="next-btn" class="carousel-btn next-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+
+                <!-- Dots (Indicators) -->
+                <div id="carousel-dots" class="carousel-dots">
+                    <!-- Dots will be generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ABOUT / MISSION SNIPPET -->
+        <section id="about" class="section-about">
+            <div class="about-grid">
+                <!-- Text Content -->
+                <div class="about-text">
+                    <h4 class="text-subtitle">A Platform for Spiritual Growth and Intimacy</h4>
+                    <h4 class="text-title">Cultivating a Deeper Walk with God Through Prayer and Teaching</h4>
+                    <p class="text-body">
+                        Eminence Channel Ministries is dedicated to helping you <strong>encounter Jesus Christ</strong> and grow in your faith. Our platform provides diverse resources centered on <strong>prayer, the secret place</strong>, and sound biblical teaching to ensure you are spiritually revitalized, replenished, and renewed. Our mission is to empower believers to impact their communities.
+                    </p>
+                    <ul class="mission-list">
+                        <li>Establishing biblical foundations for spiritual maturity.</li>
+                        <li>Fostering authentic lifelong relationships and community.</li>
+                        <li>Equipping leaders to shine Christ's light in the darkness.</li>
+                    </ul>
+                </div>
+                <!-- Mock Image Placeholder -->
+                <div class="about-image-container">
+                    <img src="images/IMG-20251126-WA0015.jpg"
+                         alt="Eminence Content Platform"
+                         class="about-image"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SERVICES SECTION (New Content based on screenshots) -->
+        <section id="services-home" class="section-services">
+            <h3 class="services-title">Our Services</h3>
+
+            <!-- Scripture Quote Block (Based on Capture.PNG) -->
+            <div class="scripture-quote-block">
+                <blockquote class="scripture-text">
+                    &ldquo;With all prayer and petition pray with specific requests at all times on every occasion and in every season in the Spirit, and with this in view, stay alert with all perseverance and petition interceding in prayer for all God’s people (Ephesians 6:18)&rdquo;
+                </blockquote>
+                <div class="quote-author">
+                    <img src="images/IMG-20251126-WA0003.jpg" alt="Celyna Ebohon" class="author-image"/>
+                    <p>Celyna Ebohon</p>
+                </div>
+            </div>
+
+            <!-- Service Items Grid (Based on capture-2.jpg) -->
+            <div class="services-grid">
+                <!-- Service 1: Prayer -->
+                <div class="service-card">
+                    <img src="images/christian-life-crisis-prayer-god.jpg" alt="Prayer Service" class="service-image">
+                    <h4>Prayer</h4>
+                    <p>You are encouraged, inspired, and motivated to pray daily, anywhere at anytime.</p>
+                </div>
+
+                <!-- Service 2: Counseling -->
+                <div class="service-card">
+                    <img src="images/african-american-patients-talking-about-healthcare-diagnosis-waiting-room-lobby-health-center-group-men-sitting-area-hospital-reception-before-attending-checkup-examination.jpg" alt="Counseling Service" class="service-image">
+                    <h4>Counseling</h4>
+                    <p>Provide Christian counseling for spiritual growth to individuals, families or groups.</p>
+                </div>
+
+                <!-- Add more services here as needed -->
+            </div>
+
+            <a href="services.html" class="btn btn-secondary services-cta">View All Services</a>
+        </section>
+
+        <!-- 6. CONTACT SECTION (Modified to be a CTA) -->
+        <section id="contact-home-cta" class="section-contact-cta">
+            <div class="contact-cta-content">
+                <h3>Ready to Connect?</h3>
+                <p>Visit our dedicated contact page for prayer requests, services, or general inquiries.</p>
+                <a href="contact.html" class="btn btn-primary">Go to Contact Page</a>
+            </div>
+        </section>
+
+    <!-- 7. FOOTER -->
+    <footer class="main-footer">
+        <p>&copy; 2025 EminenceChannel. All rights reserved.</p>
+    </footer>
+
+
+    <!-- 8. Link to our external JavaScript files -->
+
+    <!-- 1. Firebase SDKs (MUST be loaded before our custom scripts) -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+
+    <!-- 2. Firebase Configuration (MUST be loaded before script.js) -->
+    <script src="config.js"></script>
+
+    <!-- 3. Our custom scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
