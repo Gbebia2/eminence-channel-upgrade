@@ -1219,6 +1219,50 @@ section {
 }
 
 /* --------------------------------------
+   17. PROMO GALLERY SECTION (Two-Image Display)
+   -------------------------------------- */
+
+.section-promo-gallery {
+    background-color: var(--color-background); /* White background */
+    text-align: center;
+}
+
+.promo-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column on mobile */
+    gap: 2rem;
+}
+
+.promo-item {
+    background-color: var(--color-background-soft);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.promo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.promo-item img {
+    width: 100%;
+    /* Keep aspect ratio constant to maintain poster integrity */
+    height: auto;
+    display: block;
+}
+
+/* Tablet and larger: 2 columns */
+@media (min-width: 640px) {
+    .promo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --------------------------------------
    11. Media Queries
    -------------------------------------- */
 
