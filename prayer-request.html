@@ -24,11 +24,9 @@
         console.error("Firebase initialization failed:", error);
     }
     </script>
-
 </head>
 <body>
 
-    <!-- 1. HEADER -->
     <header class="main-header">
         <div class="header-content">
             <a href="index.html" class="logo-link">
@@ -43,7 +41,7 @@
                 <a href="about-us.html" class="nav-link">About Us</a>
 
                 <div class="nav-item-dropdown">
-                    <a href="#" class="nav-link">Prayers</a>
+                    <a href="prayers.html" class="nav-link">Prayers</a>
                     <div class="dropdown-menu">
                         <a href="pray-along-with-me.html">Pray Along With Me</a>
                         <a href="a-quick-word.html">A Quick Word</a>
@@ -54,10 +52,9 @@
                         <a href="my-space.html">My Space</a>
                     </div>
                 </div>
-
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="prayer-request.html" class="nav-link">Prayer Request</a>
                 <a href="contact.html" class="nav-link">Contact</a>
-                <a href="services.html" class="nav-link">Services</a>
             </nav>
             <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobile-menu-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
@@ -66,9 +63,9 @@
         <nav class="mobile-nav-dropdown" id="mobile-menu-dropdown">
             <a href="index.html">Home</a>
             <a href="about-us.html">About Us</a>
-
             <div class="mobile-dropdown-header" data-target="prayers-sub">Prayers <span class="arrow-icon"></span></div>
             <nav class="mobile-sub-menu" id="prayers-sub">
+                <a href="prayers.html" style="font-weight: 700;">— View All —</a>
                 <a href="pray-along-with-me.html">Pray Along With Me</a>
                 <a href="a-quick-word.html">A Quick Word</a>
                 <a href="ministers-desk.html">From The Minister's Desk</a>
@@ -77,73 +74,64 @@
                 <a href="my-secret-place.html">My Secret Place</a>
                 <a href="my-space.html">My Space</a>
             </nav>
-
+            <a href="services.html">Services</a>
             <a href="prayer-request.html">Prayer Request</a>
             <a href="contact.html">Contact</a>
-            <a href="services.html">Services</a>
         </nav>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <main class="main-content">
 
-        <!-- Internal Page Hero (Includes Donate Button) -->
-        <section class="internal-hero">
-            <div class="hero-header-cta">
-                <a href="#" class="btn btn-donate">Donate</a>
-            </div>
+        <section
+            class="internal-hero page-hero-with-image"
+            style="background-image: url('images/prayer-request-hero-image.jpg');"
+        >
             <h1>Submit a Prayer Request</h1>
-            <p>Your requests are handled with confidentiality and faith by our team of intercessors.</p>
+            <p>Your requests are handled with absolute confidentiality and faith by our dedicated team of intercessors. God answers prayers!</p>
         </section>
 
-        <!-- Prayer Request Form Section -->
         <section class="section-content form-section">
-            <form class="request-form">
+            <form class="request-form" id="prayer-request-form">
 
                 <h3 class="form-heading">Your Contact Information (Confidential)</h3>
 
-                <!-- Name Fields (Grid for First/Last) -->
                 <div class="form-group form-grid-2">
-                    <p>Name (Required):</p>
                     <div class="form-field">
-                        <label for="first-name">First</label>
-                        <input type="text" id="first-name" required>
+                        <label for="first-name">First Name (Required)</label>
+                        <input type="text" id="first-name" name="firstName" required>
                     </div>
                     <div class="form-field">
-                        <label for="last-name">Last</label>
-                        <input type="text" id="last-name" required>
+                        <label for="last-name">Last Name (Required)</label>
+                        <input type="text" id="last-name" name="lastName" required>
                     </div>
                 </div>
 
-                <!-- Email and Phone -->
                 <div class="form-group form-grid-2">
                     <div class="form-field">
                         <label for="email">Email (Required)</label>
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-field">
-                        <label for="phone">Phone Number (Optional)</label>
-                        <input type="tel" id="phone">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
                     </div>
                 </div>
 
-                <!-- Prayer Request Text Area -->
                 <div class="form-group">
-                    <label for="prayer-request">Prayer Request (Required)</label>
-                    <textarea id="prayer-request" rows="6" maxlength="600" required></textarea>
+                    <label for="prayer-request-text">Prayer Request (Required)</label>
+                    <textarea id="prayer-request-text" name="requestText" rows="6" maxlength="600" required></textarea>
                     <div class="char-count">0 of 600 max characters</div>
                 </div>
 
-                <!-- Contact Preference Radio Buttons -->
                 <div class="form-group">
-                    <p>Would you like to be contacted? (Required)</p>
+                    <p>Would you like to be contacted?</p>
                     <div class="radio-options">
                         <label class="radio-label">
-                            <input type="radio" name="contact-preference" value="yes" required>
+                            <input type="radio" name="contactPreference" value="yes" required>
                             Yes
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="contact-preference" value="no" required>
+                            <input type="radio" name="contactPreference" value="no" required>
                             No
                         </label>
                     </div>
@@ -155,11 +143,17 @@
             </form>
         </section>
 
+        <section id="giving-cta-footer" class="section-contact-cta-minimal">
+            <div class="contact-content-wrapper">
+                <h2>Support Our Mission</h2>
+                <a href="donate.html" class="btn btn-primary btn-cta-action">Give Now &rarr;</a>
+            </div>
+        </section>
+
     </main>
 
-    <!-- 6. FOOTER -->
     <footer class="main-footer">
-        <p>&copy; 2024 EminenceChannel. All rights reserved. | Site Redesign Prototype.</p>
+        <p>&copy; 2025 EminenceChannel. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>

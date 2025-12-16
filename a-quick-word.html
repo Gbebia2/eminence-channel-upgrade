@@ -24,15 +24,12 @@
             console.error("Firebase initialization failed:", error);
         }
     </script>
-
-    <!-- Load your main script WITHOUT defer -->
     <script src="script.js"></script>
 
 </head>
 
 <body>
 
-    <!-- HEADER -->
     <header class="main-header">
         <div class="header-content">
             <a href="index.html" class="logo-link">
@@ -59,9 +56,9 @@
                     </div>
                 </div>
 
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="prayer-request.html" class="nav-link">Prayer Request</a>
                 <a href="contact.html" class="nav-link">Contact</a>
-                <a href="services.html" class="nav-link">Services</a>
             </nav>
 
             <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobile-menu-btn">
@@ -85,34 +82,41 @@
                 <a href="my-space.html">My Space</a>
             </nav>
 
+            <a href="services.html">Services</a>
             <a href="prayer-request.html">Prayer Request</a>
             <a href="contact.html">Contact</a>
-            <a href="services.html">Services</a>
         </nav>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main class="main-content">
 
         <section class="internal-hero">
-            <div class="hero-header-cta">
-                <a href="donate.html" class="btn btn-donate">Donate</a>
-            </div>
             <h1>A Quick Word</h1>
             <p>Short, impactful messages to encourage your faith today.</p>
         </section>
 
         <section class="section-content article-content-list">
+            <div class="section-header-centered">
+                <h2 class="section-title-alt">Instant Spiritual Encouragement</h2>
+                <p class="section-subtitle-small">Read the latest concise messages and faith boosters from our ministry team.</p>
+            </div>
+
             <div id="article-posts-container" class="article-posts-container">
-                <p style="text-align: center; font-size: 1.2rem; color: var(--color-primary);">
+                <p style="text-align: center; font-size: 1.2rem; color: var(--color-text-light);">
                     Loading messages...
                 </p>
             </div>
         </section>
 
+        <section id="giving-cta-footer" class="section-contact-cta-minimal">
+            <div class="contact-content-wrapper">
+                <h2>Support Our Mission: Help Us Spread the Gospel.</h2>
+                <a href="donate.html" class="btn btn-primary btn-cta-action">Give Now →</a>
+            </div>
+        </section>
+
     </main>
 
-    <!-- FOOTER -->
     <footer class="main-footer">
         <p>&copy; 2025 EminenceChannel. All rights reserved.</p>
     </footer>

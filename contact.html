@@ -8,7 +8,6 @@
 </head>
 <body>
 
-    <!-- 1. HEADER -->
     <header class="main-header">
         <div class="header-content">
             <a href="index.html" class="logo-link">
@@ -35,9 +34,9 @@
                     </div>
                 </div>
 
+                <a href="services.html" class="nav-link">Services</a>
                 <a href="prayer-request.html" class="nav-link">Prayer Request</a>
                 <a href="contact.html" class="nav-link">Contact</a>
-                <a href="services.html" class="nav-link">Services</a>
             </nav>
             <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobile-menu-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
@@ -49,7 +48,7 @@
 
             <div class="mobile-dropdown-header" data-target="prayers-sub">Prayers <span class="arrow-icon"></span></div>
             <nav class="mobile-sub-menu" id="prayers-sub">
-                <a href="prayers.html" style="font-weight: 700;">— View All  —</a>
+                <a href="prayers.html" style="font-weight: 700;">— View All  —</a>
                 <a href="pray-along-with-me.html">Pray Along With Me</a>
                 <a href="a-quick-word.html">A Quick Word</a>
                 <a href="ministers-desk.html">From The Minister's Desk</a>
@@ -59,76 +58,71 @@
                 <a href="my-space.html">My Space</a>
             </nav>
 
+            <a href="services.html">Services</a>
             <a href="prayer-request.html">Prayer Request</a>
             <a href="contact.html">Contact</a>
-            <a href="services.html">Services</a>
         </nav>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <main class="main-content">
 
-        <!-- Internal Page Hero (Includes Donate Button) -->
-        <section class="internal-hero">
-            <div class="hero-header-cta">
-                <a href="donate.html" class="btn btn-donate">Donate</a>
-            </div>
-            <h1>Contact Us</h1>
-            <p>We are here to support your spiritual journey.</p>
+        <section
+            class="internal-hero page-hero-with-image"
+            style="background-image: url('images/IMG-20251126-WA0007.jpg');"
+        >
+            <h1>Contact Eminence Channel Ministries</h1>
+            <p>We are here to support your spiritual journey and answer your inquiries.</p>
         </section>
 
-        <!-- Contact Information Grid -->
-        <section class="section-content contact-info-section">
+        <section class="contact-info-section">
             <div class="contact-grid">
-                <div class="contact-details-container">
-                    <h3>You can reach us at</h3>
 
-                    <!-- Detail Block 1: Email -->
+                <div class="contact-details-container">
+                    <h3>Get In Touch</h3>
+                    <p class="section-subtitle-small" style="margin-bottom: 2rem;">Please use the Prayer Request page for confidential needs. For all other inquiries, please use the details below.</p>
+
                     <div class="contact-block">
                         <p class="detail-label">EMAIL</p>
                         <a href="mailto:prayforme@eminencechannel.com" class="detail-value">prayforme@eminencechannel.com</a>
                     </div>
 
-                    <!-- Detail Block 2: Phone -->
                     <div class="contact-block">
-                        <p class="detail-label">PHONE NUMBER</p>
+                        <p class="detail-label">PHONE NUMBER (PRAYER LINE)</p>
                         <a href="tel:+12818042528" class="detail-value">+1 (281) 804-2528</a>
                     </div>
 
-                    <!-- Detail Block 3: Mailing Address -->
                     <div class="contact-block">
                         <p class="detail-label">MAILING ADDRESS</p>
                         <p class="detail-value">24200 SW Freeway, Suite 402 - 124</p>
                         <p class="detail-value">Rosenberg, TX 77471</p>
                     </div>
 
-                    <!-- Detail Block 4: Social Media -->
                     <div class="contact-block">
-                        <p class="detail-label">SOCIAL MEDIA</p>
-                        <a href="#" class="detail-value">Youtube</a>
-                        <a href="#" class="detail-value">Let's Get In Touch!</a>
+                        <p class="detail-label">CONNECT WITH US</p>
+                        <a href="#" class="detail-value">YouTube Channel →</a>
+                        <a href="prayer-request.html" class="detail-value">Submit a Prayer Request →</a>
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <section id="giving-cta-footer" class="section-contact-cta-minimal">
+            <div class="contact-content-wrapper">
+                <h2>Support Our Mission: Help Us Spread the Gospel.</h2>
+                <a href="donate.html" class="btn btn-primary btn-cta-action">Give Now →</a>
+            </div>
         </section>
 
     </main>
 
-    <!-- 6. FOOTER -->
     <footer class="main-footer">
-        <p>&copy; 2025 EminenceChannel. All rights reserved.</p>
+        <p>© 2025 EminenceChannel. All rights reserved.</p>
     </footer>
 
-    <!-- 7. Link to our external JavaScript files -->
-
-    <!-- 1. Firebase SDKs (MUST be loaded before our custom scripts) -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
-
-    <!-- 2. Firebase Configuration (MUST be loaded before script.js) -->
     <script src="config.js"></script>
-
-    <!-- 3. Our custom scripts -->
     <script src="script.js"></script>
 </body>
 </html>
