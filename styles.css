@@ -1255,6 +1255,59 @@ section {
     display: block;
 }
 
+/* --------------------------------------
+   18. TESTIMONIAL CAROUSEL
+   -------------------------------------- */
+.section-testimonials {
+    background-color: var(--color-background-soft);
+    padding: var(--spacing-large) 1rem;
+    overflow: hidden;
+}
+
+.testimonial-carousel-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+.testimonial-slide {
+    display: none; /* Hidden by default */
+    padding: 2rem;
+    animation: fadeIn 0.8s ease;
+}
+
+.testimonial-slide.active {
+    display: block;
+}
+
+.testimonial-text {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--color-text-dark);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+    color: var(--color-primary-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Tablet and larger: 2 columns */
 @media (min-width: 640px) {
     .promo-grid {

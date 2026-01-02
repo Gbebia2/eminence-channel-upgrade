@@ -337,67 +337,44 @@ async function loadAndRenderPosts() {
 
 
 // ===============================
-// PRAYER REQUEST FORM + CHAR COUNT
-// ===============================
-async function initPrayerRequestPage() {
-    // Check if DB is ready before trying to attach listeners/forms
-    if (!window.db) {
-        console.error("DB not ready for Prayer Request functions.");
-        return;
-    }
-
-    const form = document.querySelector('.request-form');
-    const formMessage = document.getElementById('form-message');
-    const textarea = document.getElementById('prayer-request');
-    const charCountDisplay = document.querySelector('.char-count');
-    const maxLength = 600;
-
-    if (!form || !textarea || !charCountDisplay || !formMessage) return;
-
+    // PRAYER REQUEST FORM (The "Easy Way" Mailto + Firebase)
     // ===============================
-    // Character count updater
-    // ===============================
-    const updateCount = () => {
-        charCountDisplay.textContent = `${textarea.value.length} of ${maxLength} max characters`;
-    };
-    textarea.addEventListener('input', updateCount);
-    updateCount();
+    async function initPrayerRequestPage() {
+        if (!window.db) return;
 
-    // ===============================
-    // Form submission
-    // ===============================
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        const form = document.querySelector('.request-form');
+        const textarea = document.getElementById('prayer-request');
+        const charCountDisplay = document.querySelector('.char-count');
+        const maxLength = 600;
 
-        // Prepare data
-        const formData = {
-            firstName: document.getElementById('first-name').value,
-            lastName: document.getElementById('last-name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            request: textarea.value,
-            contactPreference: document.querySelector('input[name="contact-preference"]:checked').value,
-            date: firebase.firestore.FieldValue.serverTimestamp(),
-            status: "NEW"
+        if (!form || !textarea) return;
+
+        const updateCount = () => {
+            charCountDisplay.textContent = `${textarea.value.length} of ${maxLength} max characters`;
         };
+        textarea.addEventListener('input', updateCount);
 
-        // Show submitting message
-        formMessage.style.display = 'block';
-        formMessage.style.backgroundColor = '#d1e7dd';
-        formMessage.style.color = '#0f5132';
-        formMessage.textContent = 'Submitting request...';
+        form.addEventListener('submit', async (e) => {
+            // Note: We DO NOT e.preventDefault() here so the mailto action triggers
 
-        try {
-            await window.db.collection('requests').add(formData);
-            formMessage.textContent = 'Thank you! Your prayer request has been received.';
-            form.reset();
-            updateCount();
-        } catch (error) {
-            console.error("Error submitting prayer request:", error);
-            formMessage.textContent = 'Error submitting request. Please try again.';
-            formMessage.style.backgroundColor = '#fcebeb';
-            formMessage.style.color = '#cc0000';
-        }
+            const formData = {
+                firstName: document.getElementById('first-name').value,
+                lastName: document.getElementById('last-name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                request: textarea.value,
+                contactPreference: document.querySelector('input[name="contact-preference"]:checked').value,
+                date: firebase.firestore.FieldValue.serverTimestamp(),
+                status: "NEW"
+            };
+
+            try {
+                // Save to Firebase for record keeping
+                await window.db.collection('requests').add(formData);
+                console.log("Firebase Backup Successful");
+            } catch (error) {
+                console.error("Firebase Backup Error:", error);
+            }
 
         // Hide message after 8 seconds
         setTimeout(() => { formMessage.style.display = 'none'; }, 8000);
@@ -484,23 +461,46 @@ function attachPostListeners() {
 }
 
 
-// ===============================
-// PAGE ROUTER / INITIALIZER
-// ===============================
-
-window.addEventListener('load', () => {
-    const title = document.title;
-
-    // 1. If we are on the Prayer Request page, initialize the form logic
-    if (title.includes('Prayer Request')) {
-        initPrayerRequestPage();
-    }
-
-    // 2. If we are on ANY of the Post pages, initialize the post logic
-    if (document.getElementById('article-posts-container') || document.getElementById('video-posts-container')) {
-        initPostPages();
-    }
-    // Note: initPostPages covers all prayer/devotional subpages and home page.
-});
-
+    // ===============================
+    // PAGE ROUTER / INITIALIZER
+    // ===============================
+    window.addEventListener('load', () => {
+        const title = document.title;
+        if (title.includes('Prayer Request')) initPrayerRequestPage();
+        if (document.getElementById('article-posts-container') || document.getElementById('video-posts-container')) initPostPages();
+    });
 }
+
+// Testimonial Auto-Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dotsContainer = document.getElementById('testimonial-dots');
+    if (!slides.length) return;
+
+    let currentIdx = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => showTestimonial(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    function showTestimonial(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach(d => d.classList.remove('active'));
+
+        currentIdx = index;
+        slides[currentIdx].classList.add('active');
+        dots[currentIdx].classList.add('active');
+    }
+
+    // Auto-slide every 6 seconds
+    setInterval(() => {
+        let next = (currentIdx + 1) % slides.length;
+        showTestimonial(next);
+    }, 6000);
+});
