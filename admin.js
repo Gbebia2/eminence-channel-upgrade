@@ -1,12 +1,5 @@
-// ===============================
-// ADMIN DASHBOARD - SECURE & COMPLETE VERSION
-// ===============================
-
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // ---------------------------
-    // 1. WAIT FOR FIREBASE DB (FIRESTORE ONLY)
-    // ---------------------------
     async function waitForDb(timeout = 5000) {
         const interval = 250;
         let waited = 0;
@@ -14,93 +7,208 @@ document.addEventListener('DOMContentLoaded', async () => {
             await new Promise(resolve => setTimeout(resolve, interval));
             waited += interval;
         }
-        if (!window.db) {
-            console.error("Database connection (db) is not initialized. Admin functions disabled.");
-        }
         return window.db;
     }
 
     const db = await waitForDb();
 
-    // ---------------------------
-    // 2. FIREBASE AUTHENTICATION (SECURE)
-    // ---------------------------
-    const loginForm = document.getElementById('login-form');
+    // --- CRITICAL UI ELEMENTS ---
     const loginSection = document.getElementById('login-section');
     const dashboardSection = document.getElementById('dashboard-section');
-    const loginError = document.getElementById('login-error');
+    const loginForm = document.getElementById('login-form');
     const logoutBtn = document.getElementById('logout-btn');
 
+    // These three lines are what were missing and likely caused the break:
     const postsListContainer = document.getElementById('posts-list');
     const requestsListContainer = document.getElementById('requests-list');
-    const commentsListContainer = document.getElementById('comments-list-admin'); // NEW COMMENT CONTAINER
+    const commentsListContainer = document.getElementById('comments-list-admin');
 
     const showDashboard = () => {
         loginSection.style.display = 'none';
         dashboardSection.style.display = 'block';
         loadPosts();
         loadRequests();
-        loadComments(); // NEW: Load comments upon successful login
+        loadComments();
+        loadCurrentSettings();
     };
 
     const showLogin = (errorMessage = null) => {
         dashboardSection.style.display = 'none';
         loginSection.style.display = 'block';
         if (errorMessage) {
+            const loginError = document.getElementById('login-error');
             loginError.textContent = errorMessage;
             loginError.style.display = 'block';
-        } else {
-            loginError.style.display = 'none';
         }
     };
 
-    // --- Firebase Auth Handlers ---
+    // --- AUTHENTICATION ---
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            const emailInput = document.getElementById('admin-email').value;
-            const passwordInput = document.getElementById('admin-password').value;
-
-            showLogin('Logging in...');
-
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
             try {
-                await firebase.auth().signInWithEmailAndPassword(emailInput, passwordInput);
+                await firebase.auth().signInWithEmailAndPassword(email, password);
             } catch (error) {
-                console.error("Login failed:", error);
-                showLogin(`Login failed: ${error.message.substring(0, 50)}...`);
+                showLogin(`Login failed: ${error.message}`);
             }
         });
     }
 
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', async () => {
-            await firebase.auth().signOut();
-        });
+        logoutBtn.addEventListener('click', () => firebase.auth().signOut());
     }
 
-    // Global Auth State Listener: This is the secure gate
     firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            showDashboard();
-        } else {
-            showLogin('Please sign in to access the dashboard.');
-        }
+        if (user) showDashboard();
+        else showLogin();
     });
 
-    // ---------------------------
-    // 3. POSTS MANAGEMENT
-    // ---------------------------
-    const editorContainer = document.getElementById('editor-container');
-    const postEditorForm = document.getElementById('post-editor-form');
-    const postIdHidden = document.getElementById('post-id');
-    const postTitleInput = document.getElementById('post-title');
-    const postCategorySelect = document.getElementById('post-category');
-    const postScriptureInput = document.getElementById('post-scripture');
-    const postImageUrlInput = document.getElementById('post-image-url');
-    const postContentTextarea = document.getElementById('post-content');
+    // --- LOAD ALL PAGE SETTINGS ---
+    async function loadCurrentSettings() {
+        if (!db) return;
 
+        // Home Page
+        const homeDoc = await db.collection('siteContent').doc('homePage').get();
+        if (homeDoc.exists) {
+            const h = homeDoc.data();
+            document.getElementById('set-home-tag').value = h.heroTag || '';
+            document.getElementById('set-home-title').value = h.heroTitle || '';
+            document.getElementById('set-home-desc').value = h.heroDesc || '';
+            document.getElementById('set-home-img').value = h.heroImage || '';
+            document.getElementById('set-home-testimonials').value = h.testimonials || '';
+            document.getElementById('set-pillar1-title').value = h.pillar1Title || '';
+            document.getElementById('set-pillar1-desc').value = h.pillar1Desc || '';
+            document.getElementById('set-pillar2-title').value = h.pillar2Title || '';
+            document.getElementById('set-pillar2-desc').value = h.pillar2Desc || '';
+            document.getElementById('set-pillar3-title').value = h.pillar3Title || '';
+            document.getElementById('set-pillar3-desc').value = h.pillar3Desc || '';
+        }
+
+        // About Page
+        const aboutDoc = await db.collection('siteContent').doc('aboutPage').get();
+        if (aboutDoc.exists) {
+            const d = aboutDoc.data();
+            document.getElementById('set-hero-tag').value = d.heroTag || '';
+            document.getElementById('set-hero-title').value = d.heroTitle || '';
+            document.getElementById('set-hero-summary').value = d.heroSummary || '';
+            document.getElementById('set-mission').value = d.missionText || '';
+            document.getElementById('set-vision').value = d.visionText || '';
+            document.getElementById('set-values').value = d.valuesList || '';
+            document.getElementById('set-bio').value = d.bioText || '';
+            document.getElementById('set-image').value = d.founderImage || '';
+            document.getElementById('set-book-title').value = d.bookTitle || '';
+            document.getElementById('set-book-desc').value = d.bookDesc || '';
+            document.getElementById('set-book-img').value = d.bookImage || '';
+        }
+
+        // Services Page
+        const servDoc = await db.collection('siteContent').doc('servicesPage').get();
+        if (servDoc.exists) {
+            const s = servDoc.data();
+            document.getElementById('set-serv-hero-title').value = s.heroTitle || '';
+            document.getElementById('set-serv-hero-desc').value = s.heroDesc || '';
+            document.getElementById('set-serv-hero-bg').value = s.heroBg || '';
+            document.getElementById('set-serv-main-title').value = s.mainTitle || '';
+            document.getElementById('set-serv-main-subtitle').value = s.mainSubtitle || '';
+            document.getElementById('set-s1-title').value = s.s1Title || '';
+            document.getElementById('set-s1-desc').value = s.s1Desc || '';
+            document.getElementById('set-s1-img').value = s.s1Img || '';
+            document.getElementById('set-s2-title').value = s.s2Title || '';
+            document.getElementById('set-s2-desc').value = s.s2Desc || '';
+            document.getElementById('set-s2-img').value = s.s2Img || '';
+            document.getElementById('set-s3-title').value = s.s3Title || '';
+            document.getElementById('set-s3-desc').value = s.s3Desc || '';
+            document.getElementById('set-s3-img').value = s.s3Img || '';
+            document.getElementById('set-serv-quote').value = s.scriptureQuote || '';
+            document.getElementById('set-serv-notes-heading').value = s.notesHeading || '';
+            document.getElementById('set-serv-notes-list').value = s.notesList || '';
+        }
+    }
+
+    // --- FORM SUBMISSIONS ---
+    document.getElementById('home-settings-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const saveBtn = document.getElementById('save-home-btn');
+        saveBtn.textContent = 'Saving...';
+        try {
+            const homeData = {
+                heroTag: document.getElementById('set-home-tag').value,
+                heroTitle: document.getElementById('set-home-title').value,
+                heroDesc: document.getElementById('set-home-desc').value,
+                heroImage: document.getElementById('set-home-img').value,
+                testimonials: document.getElementById('set-home-testimonials').value,
+                pillar1Title: document.getElementById('set-pillar1-title').value,
+                pillar1Desc: document.getElementById('set-pillar1-desc').value,
+                pillar2Title: document.getElementById('set-pillar2-title').value,
+                pillar2Desc: document.getElementById('set-pillar2-desc').value,
+                pillar3Title: document.getElementById('set-pillar3-title').value,
+                pillar3Desc: document.getElementById('set-pillar3-desc').value
+            };
+            await db.collection('siteContent').doc('homePage').update(homeData);
+            alert("Home Page updated successfully!");
+        } catch (err) { alert("Error saving: " + err.message); }
+        finally { saveBtn.textContent = 'Save Home Page Changes'; }
+    });
+
+    document.getElementById('services-settings-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('save-services-btn');
+        btn.textContent = 'Saving...';
+        try {
+            const data = {
+                heroTitle: document.getElementById('set-serv-hero-title').value,
+                heroDesc: document.getElementById('set-serv-hero-desc').value,
+                heroBg: document.getElementById('set-serv-hero-bg').value,
+                mainTitle: document.getElementById('set-serv-main-title').value,
+                mainSubtitle: document.getElementById('set-serv-main-subtitle').value,
+                s1Title: document.getElementById('set-s1-title').value,
+                s1Desc: document.getElementById('set-s1-desc').value,
+                s1Img: document.getElementById('set-s1-img').value,
+                s2Title: document.getElementById('set-s2-title').value,
+                s2Desc: document.getElementById('set-s2-desc').value,
+                s2Img: document.getElementById('set-s2-img').value,
+                s3Title: document.getElementById('set-s3-title').value,
+                s3Desc: document.getElementById('set-s3-desc').value,
+                s3Img: document.getElementById('set-s3-img').value,
+                scriptureQuote: document.getElementById('set-serv-quote').value,
+                notesHeading: document.getElementById('set-serv-notes-heading').value,
+                notesList: document.getElementById('set-serv-notes-list').value
+            };
+            await db.collection('siteContent').doc('servicesPage').update(data);
+            alert("Services Page updated!");
+        } catch (err) { alert("Error: " + err.message); }
+        finally { btn.textContent = 'Save Services Page Changes'; }
+    });
+
+    document.getElementById('site-settings-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const saveBtn = document.getElementById('save-settings-btn');
+        saveBtn.textContent = 'Saving...';
+        try {
+            const updatedData = {
+                heroTag: document.getElementById('set-hero-tag').value,
+                heroTitle: document.getElementById('set-hero-title').value,
+                heroSummary: document.getElementById('set-hero-summary').value,
+                missionText: document.getElementById('set-mission').value,
+                visionText: document.getElementById('set-vision').value,
+                valuesList: document.getElementById('set-values').value,
+                bioText: document.getElementById('set-bio').value,
+                founderImage: document.getElementById('set-image').value,
+                bookTitle: document.getElementById('set-book-title').value,
+                bookDesc: document.getElementById('set-book-desc').value,
+                bookImage: document.getElementById('set-book-img').value
+            };
+            await db.collection('siteContent').doc('aboutPage').update(updatedData);
+            alert("About Page updated successfully!");
+        } catch (err) { alert("Error saving: " + err.message); }
+        finally { saveBtn.textContent = 'Save All About Page Changes'; }
+    });
+
+    // --- POSTS LOGIC ---
     function renderPosts(posts) {
+        if (!postsListContainer) return;
         postsListContainer.innerHTML = '<h3>Existing Posts</h3>';
         if (posts.length === 0) {
             postsListContainer.innerHTML += '<p>No posts found.</p>';
@@ -118,7 +226,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
             postsListContainer.appendChild(item);
         });
-
         document.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', () => editPost(btn.dataset.id));
         });
@@ -128,7 +235,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function loadPosts() {
-        if (!db) return;
+        if (!db || !postsListContainer) return;
         postsListContainer.innerHTML = '<h3>Loading posts...</h3>';
         try {
             const snapshot = await db.collection('posts').orderBy('date', 'desc').get();
@@ -138,298 +245,67 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return { id: doc.id, ...data, date: dateString };
             });
             renderPosts(posts);
-        } catch (error) {
-            console.error("Error loading posts:", error);
-            postsListContainer.innerHTML = '<p>Error loading posts. Check console.</p>';
-        }
+        } catch (error) { console.error("Error loading posts:", error); }
     }
 
     async function editPost(postId) {
-        if (!db) return alert("Firebase not connected.");
         try {
             const doc = await db.collection('posts').doc(postId).get();
-            if (!doc.exists) return alert("Post not found.");
             const post = doc.data();
-
-            postIdHidden.value = doc.id;
-            postTitleInput.value = post.title;
-            postCategorySelect.value = post.category;
-            postScriptureInput.value = post.scripture || '';
-            postImageUrlInput.value = post.image || '';
-            postContentTextarea.value = post.content || '';
-
-            editorContainer.style.display = 'block';
-        } catch (err) {
-            console.error(err);
-            alert("Error loading post for editing.");
-        }
+            document.getElementById('post-id').value = doc.id;
+            document.getElementById('post-title').value = post.title;
+            document.getElementById('post-category').value = post.category;
+            document.getElementById('post-scripture').value = post.scripture || '';
+            document.getElementById('post-image-url').value = post.image || '';
+            document.getElementById('post-content').value = post.content || '';
+            document.getElementById('editor-container').style.display = 'block';
+        } catch (err) { console.error(err); }
     }
 
     async function deletePost(postId) {
-        if (!db) return alert("Firebase not connected.");
         if (!confirm("Delete this post permanently?")) return;
         try {
             await db.collection('posts').doc(postId).delete();
             loadPosts();
-        } catch (err) {
-            console.error(err);
-            alert("Error deleting post.");
-        }
+        } catch (err) { console.error(err); }
     }
 
-    if (postEditorForm) {
-        postEditorForm.addEventListener('submit', async e => {
-            e.preventDefault();
-            if (!db) return alert("Firebase not connected.");
-
-            const savePostBtn = document.getElementById('save-post-btn');
-            const originalButtonText = savePostBtn.textContent;
-            savePostBtn.textContent = 'Saving...';
-            savePostBtn.disabled = true;
-
-            try {
-                const postId = postIdHidden.value;
-                const imageUrl = postImageUrlInput.value;
-
-                const postData = {
-                    title: postTitleInput.value,
-                    category: postCategorySelect.value,
-                    scripture: postScriptureInput.value,
-                    image: imageUrl,
-                    content: postContentTextarea.value,
-                    date: firebase.firestore.FieldValue.serverTimestamp(),
-                };
-
-                if (postId) {
-                    await db.collection('posts').doc(postId).update(postData);
-                    alert("Post updated!");
-                } else {
-                    await db.collection('posts').add(postData);
-                    alert("New post created!");
-                }
-
-                editorContainer.style.display = 'none';
-                postEditorForm.reset();
-                loadPosts();
-
-            } catch (err) {
-                console.error(err);
-                alert(`Error saving post: ${err.message || 'Check console.'}`);
-            } finally {
-                savePostBtn.textContent = originalButtonText;
-                savePostBtn.disabled = false;
-            }
-        });
-    }
-
-    document.getElementById('new-post-btn')?.addEventListener('click', () => {
-        postEditorForm.reset();
-        postIdHidden.value = '';
-        editorContainer.style.display = 'block';
-        postImageUrlInput.value = '';
-    });
-
-    document.getElementById('cancel-edit-btn')?.addEventListener('click', () => {
-        editorContainer.style.display = 'none';
-    });
-
-    // ---------------------------
-    // 4. PRAYER REQUESTS (Delete-only, Latest Tag, Collapse/Expand)
-    // ---------------------------
-    const REQUESTS_PER_PAGE = 1;
-    let allRequests = [];
-
-    async function deleteRequest(requestId) {
-        if (!db) return alert("Firebase not connected.");
-        if (!confirm("Are you sure you want to permanently delete this prayer request?")) return;
-        try {
-            await db.collection('requests').doc(requestId).delete();
-            alert("Request deleted!");
-            loadRequests();
-        } catch (err) {
-            console.error(err);
-            alert("Error deleting request.");
-        }
-    }
-
-    function renderRequestsWithControls(requestsToRender = allRequests, showAll = false) {
-        if (!requestsListContainer) return;
-
-        requestsListContainer.innerHTML = '<h3>Prayer Requests</h3>';
-
-        if (requestsToRender.length === 0) {
-            requestsListContainer.innerHTML += '<p>No requests found.</p>';
-            return;
-        }
-
-        const requestsContainer = document.createElement('div');
-        requestsContainer.className = 'requests-scroll-container';
-
-        const listToRender = showAll ? requestsToRender : requestsToRender.slice(0, REQUESTS_PER_PAGE);
-
-        listToRender.forEach((req, index) => {
-            const isLatest = index === 0;
-            const div = document.createElement('div');
-            div.className = 'request-item';
-
-            const latestTag = isLatest
-                ? `<span style="font-weight:900; color:white; background-color: var(--color-cta-blue-dark); padding: 3px 8px; border-radius: 4px; margin-left: 10px;">!! LATEST !!</span>`
-                : '';
-
-            div.innerHTML = `
-                <p><strong>${req.firstName} ${req.lastName}</strong> (${req.email} | ${req.phone || 'No phone'})</p>
-                <p><strong>Contact Pref:</strong> ${req.contactPreference}${latestTag}</p>
-                <p><strong>Date:</strong> ${req.date}</p>
-                <div class="request-content-box" style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px;">
-                    <p><strong>Request:</strong> ${req.request}</p>
-                </div>
-                <div class="post-item-actions" style="margin-top: 10px;">
-                    <button class="btn btn-primary btn-small delete-request-btn" data-id="${req.id}">Delete</button>
-                </div>
-            `;
-            requestsContainer.appendChild(div);
-        });
-
-        requestsListContainer.appendChild(requestsContainer);
-
-        // --- Show/Hide All Controls ---
-        if (allRequests.length > REQUESTS_PER_PAGE && !showAll) {
-            const showAllBtn = document.createElement('button');
-            showAllBtn.className = 'btn btn-secondary show-all-btn';
-            showAllBtn.textContent = `Show All ${allRequests.length} Requests...`;
-            showAllBtn.style.marginTop = '15px';
-            showAllBtn.addEventListener('click', () => renderRequestsWithControls(allRequests, true));
-            requestsListContainer.appendChild(showAllBtn);
-        } else if (allRequests.length > REQUESTS_PER_PAGE && showAll) {
-            const hideBtn = document.createElement('button');
-            hideBtn.className = 'btn btn-secondary hide-btn';
-            hideBtn.textContent = `Show Only Latest Request`;
-            hideBtn.style.marginTop = '15px';
-            hideBtn.addEventListener('click', () => renderRequestsWithControls(allRequests, false));
-            requestsListContainer.appendChild(hideBtn);
-        }
-
-        // Attach Delete Listener
-        document.querySelectorAll('.delete-request-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => deleteRequest(e.currentTarget.dataset.id));
-        });
-    }
-
+    // --- PRAYER REQUESTS & COMMENTS ---
     async function loadRequests() {
         if (!db || !requestsListContainer) return;
         requestsListContainer.innerHTML = '<h3>Loading requests...</h3>';
         try {
             const snapshot = await db.collection('requests').orderBy('date', 'desc').get();
-
-            allRequests = snapshot.docs.map(doc => {
+            const requests = snapshot.docs.map(doc => {
                 const data = doc.data();
                 const dateString = data.date && data.date.toDate ? data.date.toDate().toLocaleString() : 'N/A';
                 return { id: doc.id, ...data, date: dateString };
             });
-
-            renderRequestsWithControls(allRequests);
-
-        } catch (err) {
-            console.error("Error loading requests:", err);
-            requestsListContainer.innerHTML = '<p>Error loading requests. Check console.</p>';
-        }
+            renderRequestsWithControls(requests);
+        } catch (err) { console.error(err); }
     }
 
-
-    // ---------------------------
-    // 5. COMMENT MANAGEMENT (NEW)
-    // ---------------------------
-    async function deleteComment(commentId) {
-        if (!db) return alert("Firebase not connected.");
-        if (!confirm("Are you sure you want to permanently delete this comment?")) return;
-        try {
-            await db.collection('comments').doc(commentId).delete();
-            alert("Comment deleted!");
-            loadComments(); // Reload the list
-        } catch (err) {
-            console.error("Error deleting comment:", err);
-            alert("Error deleting comment. Check console.");
-        }
-    }
-
-    async function approveComment(commentId, approve = true) {
-        if (!db) return alert("Firebase not connected.");
-
-        const confirmation = approve ? "Approve this comment?" : "Unapprove this comment?";
-
-        if (!confirm(confirmation)) return;
-
-        try {
-            await db.collection('comments').doc(commentId).update({
-                approved: approve
-            });
-            alert(`Comment status updated to ${approve ? 'Approved' : 'Pending'}!`);
-            loadComments(); // Reload the list
-        } catch (err) {
-            console.error("Error updating comment status:", err);
-            alert("Error updating comment status. Check console.");
-        }
-    }
-
-    function renderComments(comments) {
-        if (!commentsListContainer) return;
-
-        commentsListContainer.innerHTML = '<h3>Pending Comments</h3>';
-
-        // Check for *pending* comments to show in the list initially
-        const pendingComments = comments.filter(c => c.approved === false);
-
-        if (comments.length === 0) {
-            commentsListContainer.innerHTML = '<p>No comments found in the database.</p>';
+    function renderRequestsWithControls(requests) {
+        if (!requestsListContainer) return;
+        requestsListContainer.innerHTML = '<h3>Prayer Requests</h3>';
+        if (requests.length === 0) {
+            requestsListContainer.innerHTML += '<p>No requests found.</p>';
             return;
         }
-
-        if (pendingComments.length === 0) {
-             commentsListContainer.innerHTML = '<p>No comments awaiting approval.</p>';
-        }
-
-        const commentListDiv = document.createElement('div');
-        commentListDiv.className = 'comments-scroll-container';
-
-        comments.forEach(comment => {
+        requests.forEach(req => {
             const div = document.createElement('div');
-            // Show all comments, but style them differently
-            div.className = `comment-item ${comment.approved ? 'approved' : 'pending'}`;
-
-            const statusBadge = comment.approved
-                ? '<span style="color: green; font-weight: bold;">[APPROVED]</span>'
-                : '<span style="color: red; font-weight: bold;">[PENDING]</span>';
-
-            const actionButton = comment.approved
-                ? `<button class="btn btn-secondary btn-small unapprove-btn" data-id="${comment.id}">Unapprove</button>`
-                : `<button class="btn btn-primary btn-small approve-btn" data-id="${comment.id}">Approve</button>`;
-
-            div.innerHTML = `
-                <p><strong>From:</strong> ${comment.name} ${statusBadge}</p>
-                <p><strong>Post ID:</strong> ${comment.postId}</p>
-                <p><strong>Date:</strong> ${comment.date}</p>
-                <div class="comment-content-box" style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc; border-radius: 4px;">
-                    <p>${comment.comment}</p>
-                </div>
-                <div class="post-item-actions" style="margin-top: 10px;">
-                    ${actionButton}
-                    <button class="btn btn-primary btn-small delete-comment-btn" data-id="${comment.id}">Delete</button>
-                </div>
-            `;
-            commentListDiv.appendChild(div);
+            div.className = 'request-item';
+            div.innerHTML = `<p><strong>${req.firstName} ${req.lastName}</strong>: ${req.request}</p>
+                             <button class="btn btn-primary btn-small delete-request-btn" data-id="${req.id}">Delete</button>`;
+            requestsListContainer.appendChild(div);
         });
-
-        commentsListContainer.appendChild(commentListDiv);
-
-        // Attach Action Listeners
-        document.querySelectorAll('.approve-btn').forEach(btn => {
-            btn.addEventListener('click', () => approveComment(btn.dataset.id, true));
-        });
-        document.querySelectorAll('.unapprove-btn').forEach(btn => {
-            btn.addEventListener('click', () => approveComment(btn.dataset.id, false));
-        });
-        document.querySelectorAll('.delete-comment-btn').forEach(btn => {
-            btn.addEventListener('click', () => deleteComment(btn.dataset.id));
+        document.querySelectorAll('.delete-request-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                if(confirm("Delete request?")) {
+                    await db.collection('requests').doc(btn.dataset.id).delete();
+                    loadRequests();
+                }
+            });
         });
     }
 
@@ -437,24 +313,81 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!db || !commentsListContainer) return;
         commentsListContainer.innerHTML = '<h3>Loading comments...</h3>';
         try {
-            // Fetch all comments, sorted by approval status (pending first) and then by date
-            const snapshot = await db.collection('comments')
-                .orderBy('approved', 'asc') // PENDING (false) loads before APPROVED (true)
-                .orderBy('date', 'desc')
-                .get();
-
+            const snapshot = await db.collection('comments').orderBy('approved', 'asc').orderBy('date', 'desc').get();
             const comments = snapshot.docs.map(doc => {
                 const data = doc.data();
                 const dateString = data.date && data.date.toDate ? data.date.toDate().toLocaleString() : 'N/A';
                 return { id: doc.id, ...data, date: dateString };
             });
-
             renderComments(comments);
-
-        } catch (err) {
-            console.error("Error loading comments:", err);
-            commentsListContainer.innerHTML = '<p>Error loading comments. Check console.</p>';
-        }
+        } catch (err) { console.error(err); }
     }
 
+    function renderComments(comments) {
+        if (!commentsListContainer) return;
+        commentsListContainer.innerHTML = '<h3>Comments Management</h3>';
+        if (comments.length === 0) {
+            commentsListContainer.innerHTML += '<p>No comments found.</p>';
+            return;
+        }
+        comments.forEach(comment => {
+            const div = document.createElement('div');
+            div.className = `comment-item ${comment.approved ? 'approved' : 'pending'}`;
+            div.innerHTML = `<p><strong>${comment.name}</strong>: ${comment.comment}</p>
+                             <button class="btn btn-secondary btn-small approve-btn" data-id="${comment.id}">${comment.approved ? 'Unapprove' : 'Approve'}</button>
+                             <button class="btn btn-primary btn-small delete-comment-btn" data-id="${comment.id}">Delete</button>`;
+            commentsListContainer.appendChild(div);
+        });
+        document.querySelectorAll('.approve-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const isApproved = btn.textContent === 'Unapprove';
+                await db.collection('comments').doc(btn.dataset.id).update({ approved: !isApproved });
+                loadComments();
+            });
+        });
+        document.querySelectorAll('.delete-comment-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                if(confirm("Delete comment?")) {
+                    await db.collection('comments').doc(btn.dataset.id).delete();
+                    loadComments();
+                }
+            });
+        });
+    }
+
+    // Editor Logic
+    if (document.getElementById('post-editor-form')) {
+        document.getElementById('post-editor-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const savePostBtn = document.getElementById('save-post-btn');
+            savePostBtn.disabled = true;
+            try {
+                const postId = document.getElementById('post-id').value;
+                const postData = {
+                    title: document.getElementById('post-title').value,
+                    category: document.getElementById('post-category').value,
+                    scripture: document.getElementById('post-scripture').value,
+                    image: document.getElementById('post-image-url').value,
+                    content: document.getElementById('post-content').value,
+                    date: firebase.firestore.FieldValue.serverTimestamp(),
+                };
+                if (postId) await db.collection('posts').doc(postId).update(postData);
+                else await db.collection('posts').add(postData);
+                document.getElementById('editor-container').style.display = 'none';
+                document.getElementById('post-editor-form').reset();
+                loadPosts();
+            } catch (err) { console.error(err); }
+            finally { savePostBtn.disabled = false; }
+        });
+    }
+
+    document.getElementById('new-post-btn')?.addEventListener('click', () => {
+        document.getElementById('post-editor-form').reset();
+        document.getElementById('post-id').value = '';
+        document.getElementById('editor-container').style.display = 'block';
+    });
+
+    document.getElementById('cancel-edit-btn')?.addEventListener('click', () => {
+        document.getElementById('editor-container').style.display = 'none';
+    });
 });

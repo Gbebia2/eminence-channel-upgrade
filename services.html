@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services | Eminence Channel Ministries</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -20,7 +21,6 @@
             <nav class="desktop-nav">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="about-us.html" class="nav-link">About Us</a>
-
                 <div class="nav-item-dropdown">
                     <a href="prayers.html" class="nav-link">Prayers</a>
                     <div class="dropdown-menu">
@@ -37,10 +37,16 @@
                 <a href="prayer-request.html" class="nav-link">Prayer Request</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </nav>
+
             <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobile-menu-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" x2="20" y1="12" y2="12"></line>
+                    <line x1="4" x2="20" y1="6" y2="6"></line>
+                    <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
             </button>
         </div>
+
         <nav class="mobile-nav-dropdown" id="mobile-menu-dropdown">
             <a href="index.html">Home</a>
             <a href="about-us.html">About Us</a>
@@ -64,38 +70,39 @@
     <main class="main-content">
 
         <section
+            id="services-hero-bg"
             class="internal-hero page-hero-with-image"
             style="background-image: url('images/IMG-20251126-WA0003.jpg');"
         >
-            <h1>Our Services</h1>
-            <p>Providing spiritual guidance, counseling, and dynamic ministry support for your growth.</p>
+            <h1 id="services-hero-title">Our Services</h1>
+            <p id="services-hero-desc">Providing spiritual guidance, counseling, and dynamic ministry support for your growth.</p>
         </section>
 
         <section class="section-content section-services-hub">
             <div class="section-header-centered">
-                <h2 class="section-title-alt">A Full Range of Spiritual Offerings</h2>
-                <p class="section-subtitle-small">Our services are structured to equip and empower you for an effective Christian life.</p>
+                <h2 id="services-main-title" class="section-title-alt">A Full Range of Spiritual Offerings</h2>
+                <p id="services-main-subtitle" class="section-subtitle-small">Our services are structured to equip and empower you for an effective Christian life.</p>
             </div>
 
             <div class="services-hub-grid">
                 <div class="service-card-full service-card-1">
-                    <img src="images/christian-life-crisis-prayer-god.jpg" alt="Prayer Service" class="service-image-hub">
-                    <h3 class="service-title-full">The Prayer Hub</h3>
-                    <p class="service-description-full">Access dynamic content for your personal prayer life. You are encouraged, inspired, and motivated to pray daily, anywhere and at anytime. Personal prayers are available on request.</p>
+                    <img id="service1-img" src="images/christian-life-crisis-prayer-god.jpg" alt="Prayer Service" class="service-image-hub">
+                    <h3 id="service1-title" class="service-title-full">The Prayer Hub</h3>
+                    <p id="service1-desc" class="service-description-full">Access dynamic content for your personal prayer life. You are encouraged, inspired, and motivated to pray daily, anywhere and at anytime. Personal prayers are available on request.</p>
                     <a href="prayers.html" class="btn-pillar-link">View Prayer Hub &rarr;</a>
                 </div>
 
                 <div class="service-card-full service-card-2">
-                    <img src="images/african-american-patients-talking-about-healthcare-diagnosis-waiting-room-lobby-health-center-group-men-sitting-area-hospital-reception-before-attending-checkup-examination.jpg" alt="Counseling Service" class="service-image-hub">
-                    <h3 class="service-title-full">Counseling</h3>
-                    <p class="service-description-full">Receive counseling for spiritual growth, to individuals, families or groups. One-on-one counseling and guidance is available on request to overcome trauma and pain points.</p>
+                    <img id="service2-img" src="images/african-american-patients-talking.jpg" alt="Counseling Service" class="service-image-hub">
+                    <h3 id="service2-title" class="service-title-full">Counseling</h3>
+                    <p id="service2-desc" class="service-description-full">Receive counseling for spiritual growth, to individuals, families or groups. One-on-one counseling and guidance is available on request to overcome trauma and pain points.</p>
                     <a href="contact.html" class="btn-pillar-link">Request Counseling &rarr;</a>
                 </div>
 
                 <div class="service-card-full service-card-3">
-                    <img src="" alt="Ministering/Speaking" class="service-image-hub">
-                    <h3 class="service-title-full">Ministering</h3>
-                    <p class="service-description-full">The Minister is available for speaking engagements in gatherings – churches, conferences, seminars, retreats, etc., for small or large groups, locally or out of state.</p>
+                    <img id="service3-img" src="images/newphoto.jpg" alt="Ministering/Speaking" class="service-image-hub">
+                    <h3 id="service3-title" class="service-title-full">Ministering</h3>
+                    <p id="service3-desc" class="service-description-full">The Minister is available for speaking engagements in gatherings – churches, conferences, seminars, retreats, etc. for small or large groups, locally or out of state.</p>
                     <a href="contact.html" class="btn-pillar-link">Book the Minister &rarr;</a>
                 </div>
             </div>
@@ -103,20 +110,14 @@
 
         <section class="section-content prayer-notes-section">
             <div class="prayer-notes-container">
-                <blockquote class="hope-scripture">
+                <blockquote id="dynamic-services-quote" class="hope-scripture">
                     "May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit" (Romans 15:13)
                 </blockquote>
 
-                <h3 class="notes-heading">Praying with Hope and Perseverance</h3>
+                <h3 id="dynamic-notes-heading" class="notes-heading">Praying with Hope and Perseverance</h3>
 
-                <ul class="clean-list prayer-notes-list-alt">
-                    <li>Pray all kinds of prayer (Ephesians 6:18)</li>
-                    <li>Make specific requests known to God (Philippians 4:6)</li>
-                    <li>Pray fervently, earnestly, and consistently (James 5:16-17)</li>
-                    <li>Pray in all circumstances and every situation (Philippians 4:6)</li>
-                    <li>Pray always without ceasing (1st Thessalonians 5:17)</li>
-                    <li>Remember: nothing is too small or too big to pray about.</li>
-                </ul>
+                <ul id="dynamic-notes-list" class="clean-list prayer-notes-list-alt">
+                    </ul>
             </div>
         </section>
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eminence Channel Ministries | Encounter. Grow. Shine.</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
     </head>
 <body>
@@ -65,9 +66,9 @@
         <section id="new-hero" class="section-split-hero">
             <div class="split-hero-content">
                 <div class="hero-text-block">
-                    <p class="hero-intro-tag">Encounter Jesus. Grow Your Faith.</p>
-                    <h1 class="hero-main-title">Eminence Channel Ministries</h1>
-                    <p class="hero-mission-summary">
+                    <p id="home-hero-tag" class="hero-intro-tag">Encounter Jesus. Grow Your Faith.</p>
+                    <h1 id="home-hero-title" class="hero-main-title">Eminence Channel Ministries</h1>
+                    <p id="home-hero-desc" class="hero-mission-summary">
                         A Platform for Spiritual Renewal and Deep Intimacy with God.
                     </p>
                     <div class="hero-actions-new">
@@ -77,7 +78,7 @@
                 </div>
 
                 <div class="hero-image-block">
-                    <img src="images/IMG-20251126-WA0002.jpg" alt="Client's Professional Image" class="client-main-image"/>
+                    <img id="home-hero-img" src="images/IMG-20251126-WA0002.jpg" alt="Ministries Hero Image" class="client-main-image"/>
                 </div>
             </div>
 
@@ -91,25 +92,24 @@
 
             <div class="pillar-cards-grid">
                 <div class="pillar-card pillar-card-1">
-                    <h3 class="pillar-title">1. The Secret Place (Prayer)</h3>
-                    <p class="pillar-description">Access dynamic devotional content, guided prayers, and video broadcasts designed to deepen your personal conversation with God.</p>
+                    <h3 id="pillar1-title" class="pillar-title">1. The Secret Place (Prayer)</h3>
+                    <p id="pillar1-desc" class="pillar-description">Access dynamic devotional content, guided prayers, and video broadcasts designed to deepen your personal conversation with God.</p>
                     <a href="prayers.html" class="btn-pillar-link">Visit Prayer Hub &rarr;</a>
                 </div>
 
                 <div class="pillar-card pillar-card-2">
-                    <h3 class="pillar-title">2. Sound Doctrine (Teaching)</h3>
-                    <p class="pillar-description">Find structured biblical studies and teachings from the Minister's Desk to help you build a solid foundation of faith and understanding.</p>
+                    <h3 id="pillar2-title" class="pillar-title">2. Sound Doctrine (Teaching)</h3>
+                    <p id="pillar2-desc" class="pillar-description">Find structured biblical studies and teachings from the Minister's Desk to help you build a solid foundation of faith and understanding.</p>
                     <a href="ministers-desk.html" class="btn-pillar-link">Read Teachings &rarr;</a>
                 </div>
 
                 <div class="pillar-card pillar-card-3">
-                    <h3 class="pillar-title">3. Spiritual Guidance (Request)</h3>
-                    <p class="pillar-description">Submit your personal prayer requests and connect with the ministry team for confidential support and Christian guidance.</p>
+                    <h3 id="pillar3-title" class="pillar-title">3. Spiritual Guidance (Request)</h3>
+                    <p id="pillar3-desc" class="pillar-description">Submit your personal prayer requests and connect with the ministry team for confidential support and Christian guidance.</p>
                     <a href="prayer-request.html" class="btn-pillar-link">Submit a Request &rarr;</a>
                 </div>
             </div>
         </section>
-
 
         <section id="gallery-section" class="section-gallery">
             <h3>Photo Highlights</h3>
@@ -141,61 +141,47 @@
             </div>
         </section>
 
-        <section id="gallery-section" class="section-gallery">
-            </section>
-
-            <section class="section-promo-gallery">
-        <div class="section-header-centered">
-            <h2 class="section-title-alt">Latest Outreach & Ministry Focus</h2>
-            <p class="section-subtitle-small">Highlighting some areas of spiritual and community impact.</p>
-        </div>
-
-        <div class="promo-grid">
-
-            <div class="promo-item">
-                <img
-                    src="images/WhatsApp Image 2025-12-10 at 21.22.53_766b939c.jpg"
-                    alt="Women Outreach: Empowered to Perform - The Objectives"
-                    loading="lazy"
-                />
+        <section class="section-promo-gallery">
+            <div class="section-header-centered">
+                <h2 class="section-title-alt">Latest Outreach & Ministry Focus</h2>
+                <p class="section-subtitle-small">Highlighting some areas of spiritual and community impact.</p>
             </div>
 
-            <div class="promo-item">
-                <img
-                    src="images/WhatsApp Image 2025-12-10 at 21.22.54_89c85b53.jpg"
-                    alt="Empowered to Perform - Ministry Statement"
-                    loading="lazy"
-                />
+            <div class="promo-grid">
+                <div class="promo-item">
+                    <img
+                        src="images/WhatsApp Image 2025-12-10 at 21.22.53_766b939c.jpg"
+                        alt="Women Outreach"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="promo-item">
+                    <img
+                        src="images/WhatsApp Image 2025-12-10 at 21.22.54_89c85b53.jpg"
+                        alt="Ministry Statement"
+                        loading="lazy"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="section-testimonials">
+            <div class="section-header-centered">
+                <h2 class="section-title-alt">Testimonies & Impact</h2>
+                <p class="section-subtitle-small">Voices from our community sharing the power of faith and prayer.</p>
             </div>
 
-        </div>
-    </section>
+            <div class="testimonial-carousel-wrapper">
+                <div class="testimonial-container" id="testimonial-container">
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-text">Loading testimonies...</p>
+                        <h4 class="testimonial-author"></h4>
+                    </div>
+                </div>
 
-    <section class="section-testimonials">
-    <div class="section-header-centered">
-        <h2 class="section-title-alt">Testimonies & Impact</h2>
-        <p class="section-subtitle-small">Voices from our community sharing the power of faith and prayer.</p>
-    </div>
-
-    <div class="testimonial-carousel-wrapper">
-        <div class="testimonial-container" id="testimonial-container">
-            <div class="testimonial-slide active">
-                <p class="testimonial-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."</p>
-                <h4 class="testimonial-author">— Member Name</h4>
+                <div class="testimonial-dots" id="testimonial-dots"></div>
             </div>
-            <div class="testimonial-slide">
-                <p class="testimonial-text">"Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
-                <h4 class="testimonial-author">— Member Name</h4>
-            </div>
-            <div class="testimonial-slide">
-                <p class="testimonial-text">"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."</p>
-                <h4 class="testimonial-author">— Member Name</h4>
-            </div>
-        </div>
-
-        <div class="testimonial-dots" id="testimonial-dots"></div>
-    </div>
-</section>
+        </section>
 
         <section id="giving-cta" class="section-contact-cta-minimal">
             <div class="contact-content-wrapper">
@@ -216,7 +202,6 @@
     <footer class="main-footer">
         <p>&copy; 2025 EminenceChannel. All rights reserved.</p>
     </footer>
-
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>

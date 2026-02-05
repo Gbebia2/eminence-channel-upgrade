@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Eminence Channel Ministries</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -39,6 +40,133 @@
         <!-- 3. DASHBOARD SECTION (Hidden by default) -->
         <section id="dashboard-section" class="admin-section section-content" style="display: none;">
 
+            <h2>Home Page Content</h2>
+            <div class="admin-section settings-container" style="background: #f0f4f8; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #d1d9e6;">
+                <form id="home-settings-form">
+                    <h3>Hero Section</h3>
+                    <label>Hero Tag:</label>
+                    <input type="text" id="set-home-tag" style="width:100%; margin-bottom:10px;">
+                    <label>Hero Title:</label>
+                    <input type="text" id="set-home-title" style="width:100%; margin-bottom:10px;">
+                    <label>Hero Description:</label>
+                    <textarea id="set-home-desc" rows="3" style="width:100%; margin-bottom:10px;"></textarea>
+                    <label>Hero Image Path:</label>
+                    <input type="text" id="set-home-img" style="width:100%; margin-bottom:15px;">
+
+                    <label>Testimonials (Format: Message ~ Author | Message ~ Author):</label>
+                    <textarea id="set-home-testimonials" rows="4" style="width:100%; margin-bottom:10px;"></textarea>
+
+                    <h3>Ministry Pillars</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                        <div>
+                            <label>Pillar 1 Title:</label>
+                            <input type="text" id="set-pillar1-title" style="width:100%; margin-bottom:5px;">
+                            <label>Pillar 1 Description:</label>
+                            <textarea id="set-pillar1-desc" rows="4" style="width:100%;"></textarea>
+                        </div>
+                        <div>
+                            <label>Pillar 2 Title:</label>
+                            <input type="text" id="set-pillar2-title" style="width:100%; margin-bottom:5px;">
+                            <label>Pillar 2 Description:</label>
+                            <textarea id="set-pillar2-desc" rows="4" style="width:100%;"></textarea>
+                        </div>
+                        <div>
+                            <label>Pillar 3 Title:</label>
+                            <input type="text" id="set-pillar3-title" style="width:100%; margin-bottom:5px;">
+                            <label>Pillar 3 Description:</label>
+                            <textarea id="set-pillar3-desc" rows="4" style="width:100%;"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="save-home-btn" style="margin-top:20px;">Save Home Page Changes</button>
+                </form>
+            </div>
+
+            <h2>Services Page Content</h2>
+            <div class="admin-section settings-container" style="background: #fff9f0; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ffe8cc;">
+                <form id="services-settings-form">
+                    <h3>Hero & General</h3>
+                    <label>Hero Title:</label>
+                    <input type="text" id="set-serv-hero-title" style="width:100%; margin-bottom:10px;">
+                    <label>Hero Description:</label>
+                    <input type="text" id="set-serv-hero-desc" style="width:100%; margin-bottom:10px;">
+                    <label>Hero Background Image URL:</label>
+                    <input type="text" id="set-serv-hero-bg" style="width:100%; margin-bottom:10px;">
+                    <label>Main Section Title:</label>
+                    <input type="text" id="set-serv-main-title" style="width:100%; margin-bottom:10px;">
+                    <label>Main Section Subtitle:</label>
+                    <input type="text" id="set-serv-main-subtitle" style="width:100%; margin-bottom:15px;">
+
+                    <h3>Service Cards</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div style="background: #fff; padding: 10px; border-radius: 5px; border: 1px solid #eee;">
+                            <h4>Service 1</h4>
+                            <label>Title:</label><input type="text" id="set-s1-title" style="width:100%; margin-bottom:5px;">
+                            <label>Image URL:</label><input type="text" id="set-s1-img" style="width:100%; margin-bottom:5px;">
+                            <label>Description:</label><textarea id="set-s1-desc" rows="3" style="width:100%;"></textarea>
+                        </div>
+                        <div style="background: #fff; padding: 10px; border-radius: 5px; border: 1px solid #eee;">
+                            <h4>Service 2</h4>
+                            <label>Title:</label><input type="text" id="set-s2-title" style="width:100%; margin-bottom:5px;">
+                            <label>Image URL:</label><input type="text" id="set-s2-img" style="width:100%; margin-bottom:5px;">
+                            <label>Description:</label><textarea id="set-s2-desc" rows="3" style="width:100%;"></textarea>
+                        </div>
+                        <div style="background: #fff; padding: 10px; border-radius: 5px; border: 1px solid #eee;">
+                            <h4>Service 3</h4>
+                            <label>Title:</label><input type="text" id="set-s3-title" style="width:100%; margin-bottom:5px;">
+                            <label>Image URL:</label><input type="text" id="set-s3-img" style="width:100%; margin-bottom:5px;">
+                            <label>Description:</label><textarea id="set-s3-desc" rows="3" style="width:100%;"></textarea>
+                        </div>
+                    </div>
+
+                    <h3>Scripture & Prayer Notes</h3>
+                    <label>Scripture Quote:</label>
+                    <textarea id="set-serv-quote" rows="2" style="width:100%; margin-bottom:10px;"></textarea>
+                    <label>Notes Heading:</label>
+                    <input type="text" id="set-serv-notes-heading" style="width:100%; margin-bottom:10px;">
+                    <label>Prayer Notes (Separate items with | ):</label>
+                    <textarea id="set-serv-notes-list" rows="4" style="width:100%; margin-bottom:10px;"></textarea>
+
+                    <button type="submit" class="btn btn-primary" id="save-services-btn">Save Services Page Changes</button>
+                </form>
+            </div>
+
+            <h2>About Us Page Content</h2>
+            <div class="admin-section settings-container" style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
+                <form id="site-settings-form">
+                    <h3>Hero Section</h3>
+                    <label>Hero Tag:</label>
+                    <input type="text" id="set-hero-tag" style="width:100%; margin-bottom:10px;">
+                    <label>Hero Title:</label>
+                    <input type="text" id="set-hero-title" style="width:100%; margin-bottom:10px;">
+                    <label>Hero Summary (HTML allowed):</label>
+                    <textarea id="set-hero-summary" rows="4" style="width:100%; margin-bottom:15px;"></textarea>
+
+                    <h3>Mission, Vision & Values</h3>
+                    <label>Core Mission:</label>
+                    <textarea id="set-mission" rows="3" style="width:100%; margin-bottom:10px;"></textarea>
+                    <label>Our Vision:</label>
+                    <textarea id="set-vision" rows="3" style="width:100%; margin-bottom:10px;"></textarea>
+                    <label>Core Values :</label>
+                    <textarea id="set-values" rows="3" style="width:100%; margin-bottom:15px;" placeholder="Value 1 | Value 2 | Value 3"></textarea>
+
+                    <h3>Biography & Image</h3>
+                    <label>Founder Biography (HTML allowed):</label>
+                    <textarea id="set-bio" rows="6" style="width:100%; margin-bottom:10px;"></textarea>
+                    <label>Founder Image Path:</label>
+                    <input type="text" id="set-image" style="width:100%; margin-bottom:15px;">
+
+                    <h3>Publications</h3>
+                    <label>Book Title:</label>
+                    <input type="text" id="set-book-title" style="width:100%; margin-bottom:10px;">
+                    <label>Book Description:</label>
+                    <textarea id="set-book-desc" rows="2" style="width:100%; margin-bottom:10px;"></textarea>
+                    <label>Book Image Path:</label>
+                    <input type="text" id="set-book-img" style="width:100%; margin-bottom:15px;">
+
+                    <button type="submit" class="btn btn-primary" id="save-settings-btn">Save All About Page Changes</button>
+                </form>
+            </div>
             <!-- Posts Management -->
             <h2>Post Management</h2>
             <div class="dashboard-controls">
@@ -51,12 +179,11 @@
             </div>
 
             <!-- Prayer Requests Management -->
-            <h2>Prayer Requests</h2>
+
             <div id="requests-list" class="requests-list-container">
                 <h3>Loading Requests...</h3>
             </div>
 
-            <h2>Pending Comments</h2>
             <div id="comments-list-admin" class="comments-list-admin-container">
                 <h3>Loading Comments...</h3>
             </div>
