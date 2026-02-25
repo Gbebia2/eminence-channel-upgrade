@@ -208,24 +208,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- POSTS LOGIC ---
     function renderPosts(posts) {
-        if (!postsListContainer) return;
-        postsListContainer.innerHTML = '<h3>Existing Posts</h3>';
-        if (posts.length === 0) {
-            postsListContainer.innerHTML += '<p>No posts found.</p>';
-            return;
-        }
-        posts.forEach(post => {
-            const item = document.createElement('div');
-            item.className = 'post-item';
-            item.innerHTML = `
-                <span>[${post.category.toUpperCase()}] ${post.title} (${post.date})</span>
-                <div class="post-item-actions">
-                    <button class="btn btn-secondary edit-btn" data-id="${post.id}">Edit</button>
-                    <button class="btn btn-primary delete-btn" data-id="${post.id}">Delete</button>
-                </div>
-            `;
-            postsListContainer.appendChild(item);
-        });
+    if (!postsListContainer) return;
+    postsListContainer.innerHTML = '<h3>Existing Posts</h3>';
+    if (posts.length === 0) {
+        postsListContainer.innerHTML += '<p>No posts found.</p>';
+        return;
+    }
+    posts.forEach(post => {
+        const item = document.createElement('div');
+        item.className = 'post-item';
+        item.innerHTML = `
+            <span>[${post.category.toUpperCase()}] ${post.title}</span>
+            <div class="post-item-actions">
+                <button class="btn btn-secondary edit-btn" data-id="${post.id}">Edit</button>
+                <button class="btn btn-primary delete-btn" data-id="${post.id}">Delete</button>
+            </div>
+        `;
+        postsListContainer.appendChild(item);
+    });
         document.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', () => editPost(btn.dataset.id));
         });

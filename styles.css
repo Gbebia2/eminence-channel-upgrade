@@ -164,22 +164,24 @@ section {
     padding: 0.5rem 0.75rem;
 }
 
-.nav-item-dropdown > .nav-link {
-    padding: 0;
+.nav-item-dropdown {
+    position: relative;
+    padding-bottom: 10px;
 }
 
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
+    /* Ensure it starts right at the bottom of the nav bar */
+    top: 100%;
+    left: 0;
     background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    min-width: 250px;
-    padding: 0.5rem 0;
-    z-index: 100;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 4px;
+    /* This removes any gap that causes the menu to close */
+    margin-top: -10px;
 }
 
 .nav-item-dropdown:hover .dropdown-menu {
@@ -344,15 +346,13 @@ section {
 }
 
 
-
 /* Style for pages with a background image */
 .page-hero-with-image {
     background-size: cover;
-    background-position: center center; /* <--- FIXED: Centers the image horizontally AND vertically */
+    background-position: center; /* Default starting point */
     background-repeat: no-repeat;
-    /* Define height for clear presentation */
     min-height: 350px;
-    padding-top: 100px; /* Push content down slightly */
+    padding-top: 100px;
     padding-bottom: 50px;
 }
 
@@ -1433,4 +1433,67 @@ section {
         /* About page image */
         background-image: url('images/IMG-20251126-WA0004.jpg');
     }
+}
+
+
+#contact-hero-bg.page-hero-with-image {
+    background-position: 50% 12% !important;
+    background-size: 65%;
+}
+
+/* Maintain this position on mobile so the face stays framed */
+@media (max-width: 639px) {
+    #contact-hero-bg.page-hero-with-image {
+        background-position: 50% 15% !important;
+        background-size: cover;
+    }
+}
+
+.return-hub-section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border-top: 1px solid var(--color-background-soft);
+}
+
+.book-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.book-card {
+    background: var(--color-background-soft);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-card img {
+    width: 100%;
+    max-width: 200px; /* Keeps book covers from being too huge */
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.book-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-primary-dark);
+}
+
+.book-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    min-height: 3rem; /* Keeps buttons aligned if text length varies */
 }

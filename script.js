@@ -153,8 +153,8 @@ async function loadAndRenderPosts() {
         const snapshot = await db.collection('posts').where('category', '==', POST_CATEGORY).orderBy('date', 'desc').get();
         const posts = snapshot.docs.map(doc => {
             const data = doc.data();
-            const dateStr = data.date && data.date.toDate ? data.date.toDate().toLocaleDateString() : 'N/A';
-            return { id: doc.id, ...data, date: dateStr };
+            // We still fetch the date for sorting purposes, but we won't display it
+            return { id: doc.id, ...data };
         });
 
         if (posts.length === 0) {
@@ -170,7 +170,6 @@ async function loadAndRenderPosts() {
                 article.innerHTML = `
                     <div class="video-item-container">
                         <h2>${post.title}</h2>
-                        <p class="article-meta">Broadcast Date: ${post.date}</p>
                         <div class="video-wrapper"><iframe src="${post.image}" frameborder="0" allowfullscreen></iframe></div>
                         <p class="video-description">${post.content}</p>
                     </div>`;
@@ -183,14 +182,14 @@ async function loadAndRenderPosts() {
                 article.innerHTML = `
                     <div class="article-header-dynamic">
                         <h2>${post.title}</h2>
-                        <p class="article-meta">${post.scripture ? 'Scripture: ' + post.scripture + ' | ' : ''} Posted: ${post.date}</p>
+                        <p class="article-meta">${post.scripture ? 'Scripture: ' + post.scripture : ''}</p>
                     </div>
                     <div class="article-body-dynamic">
                         <img src="${post.image}" class="article-banner-image-dynamic"/>
-                        <p class="post-content-area" id="content-${post.id}">
-                            <span class="snippet">${snippet}</span>
-                            <span class="full-content" style="display:none;">${fullText}</span>
-                        </p>
+                        <div class="post-content-area" id="content-${post.id}">
+                            <div class="snippet">${snippet}</div>
+                            <div class="full-content" style="display:none;">${fullText}</div>
+                        </div>
                         ${isLong ? `<a href="#" class="read-more-btn" onclick="event.preventDefault(); toggleContent('${post.id}')">Read More »</a>` : ''}
                     </div>
                     <div class="comments-section">
@@ -209,16 +208,15 @@ async function loadAndRenderPosts() {
     } catch (e) { console.error(e); }
 }
 
-// Global Toggle for Read More
 window.toggleContent = (id) => {
     const area = document.getElementById(`content-${id}`);
     const snippet = area.querySelector('.snippet');
     const full = area.querySelector('.full-content');
     const btn = area.nextElementSibling;
-    const isExpanded = full.style.display === 'inline';
+    const isExpanded = full.style.display === 'block';
 
-    full.style.display = isExpanded ? 'none' : 'inline';
-    snippet.style.display = isExpanded ? 'inline' : 'none';
+    full.style.display = isExpanded ? 'none' : 'block';
+    snippet.style.display = isExpanded ? 'block' : 'none';
     btn.textContent = isExpanded ? 'Read More »' : 'Show Less «';
 };
 
@@ -371,11 +369,17 @@ async function loadServicesPageContent() {
             const data = doc.data();
 
             // Hero Section
-            document.getElementById('services-hero-title').innerText = data.heroTitle || '';
-            document.getElementById('services-hero-desc').innerText = data.heroDesc || '';
-            if (data.heroBg) {
-                document.getElementById('services-hero-bg').style.backgroundImage = `url('${data.heroBg}')`;
-            }
+        const heroTitleEl = document.getElementById('services-hero-title');
+        const heroDescEl = document.getElementById('services-hero-desc');
+        const heroBgEl = document.getElementById('services-hero-bg');
+
+        if (heroTitleEl) heroTitleEl.innerText = data.heroTitle || '';
+        if (heroDescEl) heroDescEl.innerText = data.heroDesc || '';
+
+        // Only update the background image URL, let CSS handle the positioning
+        if (heroBgEl && data.heroBg) {
+            heroBgEl.style.backgroundImage = `url('${data.heroBg}')`;
+        }
 
             // Main Titles
             document.getElementById('services-main-title').innerText = data.mainTitle || '';
